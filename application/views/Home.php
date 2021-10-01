@@ -30,7 +30,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">List Sales</h5>
-            <a href="#" class="btn btn-primary">Next</a>
+            <a href="<?php echo site_url('sales/'); ?>" class="btn btn-primary">Next</a>
           </div>
         </div>
       </div>

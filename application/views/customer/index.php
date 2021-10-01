@@ -38,5 +38,6 @@
     	<?php } ?>
     </table>
     <a href="<?php echo site_url('customer/add/'); ?>" type="button" class="btn btn-primary btn-lg btn-block">Add Data</a>
+    <a href="<?php echo site_url('home/'); ?>" type="button" class="btn btn-secondary btn-lg btn-block">Back to Menu</a>
   </div>
 </body>

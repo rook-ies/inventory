@@ -4,15 +4,15 @@ class Sales extends CI_Controller{
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Sale_model');
+        $this->load->model('Model_sales');
     }
 
 
     function index()
     {
-        $data['sales'] = $this->Sale_model->get_all_sales();
+        $data['sales'] = $this->Model_sales->get_all_sales();
 
-        $data['_view'] = 'sale/index';
+        $data['_view'] = 'sales/index';
         $this->load->view('layouts/main',$data);
     }
 
@@ -38,18 +38,18 @@ class Sales extends CI_Controller{
 				'total_bayar' => $this->input->post('total_bayar'),
             );
 
-            $sale_id = $this->Sale_model->add_sale($params);
-            redirect('sale/index');
+            $sale_id = $this->Model_sales->add_sales($params);
+            redirect('sales/index');
         }
         else
         {
-			$this->load->model('Item_model');
-			$data['all_item'] = $this->Item_model->get_all_item();
+			$this->load->model('Model_item');
+			$data['all_item'] = $this->Model_item->get_all_item();
 
-			$this->load->model('Customer_model');
-			$data['all_customer'] = $this->Customer_model->get_all_customer();
+			$this->load->model('Model_customer');
+			$data['all_customer'] = $this->Model_customer->get_all_customer();
 
-            $data['_view'] = 'sale/add';
+            $data['_view'] = 'sales/add';
             $this->load->view('layouts/main',$data);
         }
     }
@@ -57,9 +57,9 @@ class Sales extends CI_Controller{
     function edit($code_transaksi)
     {
 
-        $data['sale'] = $this->Sale_model->get_sale($code_transaksi);
+        $data['sales'] = $this->Model_sales->get_sales($code_transaksi);
 
-        if(isset($data['sale']['code_transaksi']))
+        if(isset($data['sales']['code_transaksi']))
         {
             $this->load->library('form_validation');
 
@@ -81,36 +81,36 @@ class Sales extends CI_Controller{
 					'total_bayar' => $this->input->post('total_bayar'),
                 );
 
-                $this->Sale_model->update_sale($code_transaksi,$params);
-                redirect('sale/index');
+                $this->Model_sales->update_sales($code_transaksi,$params);
+                redirect('sales/index');
             }
             else
             {
-				$this->load->model('Item_model');
-				$data['all_item'] = $this->Item_model->get_all_item();
+				$this->load->model('Model_item');
+				$data['all_item'] = $this->Model_item->get_all_item();
 
-				$this->load->model('Customer_model');
-				$data['all_customer'] = $this->Customer_model->get_all_customer();
+				$this->load->model('Model_customer');
+				$data['all_customer'] = $this->Model_customer->get_all_customer();
 
-                $data['_view'] = 'sale/edit';
+                $data['_view'] = 'sales/edit';
                 $this->load->view('layouts/main',$data);
             }
         }
         else
-            show_error('The sale you are trying to edit does not exist.');
+            show_error('The sales you are trying to edit does not exist.');
     }
 
     function remove($code_transaksi)
     {
-        $sale = $this->Sale_model->get_sale($code_transaksi);
+        $sale = $this->Model_sales->get_sales($code_transaksi);
 
         if(isset($sale['code_transaksi']))
         {
-            $this->Sale_model->delete_sale($code_transaksi);
-            redirect('sale/index');
+            $this->Model_sales->delete_sales($code_transaksi);
+            redirect('sales/index');
         }
         else
-            show_error('The sale you are trying to delete does not exist.');
+            show_error('The sales you are trying to delete does not exist.');
     }
 
 }
